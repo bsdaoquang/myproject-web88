@@ -3,6 +3,8 @@
 import React from 'react';
 
 function TextComponent({ text, size, color, line, weight, styles }) {
+	const age = 26;
+
 	return (
 		<p
 			style={
