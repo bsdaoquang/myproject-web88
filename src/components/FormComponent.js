@@ -7,7 +7,7 @@ function FormComponent({ onAddUser }) {
 	const [form] = Form.useForm();
 
 	const handleAddUser = (values) => {
-		onAddUser(values);
+		onAddUser(values.name);
 
 		form.resetFields();
 	};
