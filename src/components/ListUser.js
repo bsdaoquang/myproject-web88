@@ -1,28 +1,67 @@
 /** @format */
 
-import { List, Checkbox } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { add0ToNumber } from '../utils/add0ToNumber';
 import TextComponent from './TextComponent';
+import { Button, Card, List, Space } from 'antd';
+import ToggleProfile from '../modals/ToggleProfile';
 
 function ListUser({ users, onChangeState }) {
-	const renderTaskItem = (item, index) => {
-		return (
-			<div key={`task${index}`}>
-				<Checkbox
-					style={{ marginBottom: 12 }}
-					onChange={(val) => onChangeState(val.target.checked, index)}
-					value={item.isCompleted}>
-					<TextComponent
-						styles={{ margin: 0 }}
-						text={item.content}
-						color={item.isCompleted ? '#e0e0e0' : '#212121'}
-					/>
-				</Checkbox>
-			</div>
-		);
+	const [profiles, setProfiles] = useState([]);
+	const [profile, setProfile] = useState();
+	const [isVisibleModalProfile, setIsVisibleModalProfile] = useState(false);
+
+	const onFinish = (vals) => {
+		setProfiles([...profiles, vals]);
 	};
 
-	return <>{users.map((item, index) => renderTaskItem(item, index))}</>;
+	return (
+		<>
+			<div className='container mt-4'>
+				<div className='col-8 offset-2'>
+					<Card
+						extra={
+							<Button onClick={() => setIsVisibleModalProfile(true)}>
+								Add Profile
+							</Button>
+						}>
+						<List
+							dataSource={profiles}
+							renderItem={(item, index) => (
+								<List.Item
+									key={`profile${index}`}
+									extra={
+										<Button
+											type='link'
+											onClick={() => {
+												setProfile(item);
+												setIsVisibleModalProfile(true);
+											}}>
+											Edit
+										</Button>
+									}>
+									<List.Item.Meta
+										title={item.name}
+										description={item.address}
+									/>
+								</List.Item>
+							)}
+						/>
+					</Card>
+				</div>
+			</div>
+
+			<ToggleProfile
+				isVisible={isVisibleModalProfile}
+				onClose={() => {
+					setProfile(null);
+					setIsVisibleModalProfile(false);
+				}}
+				onFinish={(val) => onFinish(val)}
+				profile={profile}
+			/>
+		</>
+	);
 }
 
 export default ListUser;
