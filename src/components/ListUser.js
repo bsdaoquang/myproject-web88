@@ -16,51 +16,52 @@ function ListUser({ users, onChangeState }) {
 	};
 
 	return (
-		<>
-			<div className='container mt-4'>
-				<div className='col-8 offset-2'>
-					<Card
-						extra={
-							<Button onClick={() => setIsVisibleModalProfile(true)}>
-								Add Profile
-							</Button>
-						}>
-						<List
-							dataSource={profiles}
-							renderItem={(item, index) => (
-								<List.Item
-									key={`profile${index}`}
-									extra={
-										<Button
-											type='link'
-											onClick={() => {
-												setProfile(item);
-												setIsVisibleModalProfile(true);
-											}}>
-											Edit
-										</Button>
-									}>
-									<List.Item.Meta
-										title={item.name}
-										description={item.address}
-									/>
-								</List.Item>
-							)}
-						/>
-					</Card>
-				</div>
-			</div>
+		<></>
+		// <>
+		// 	<div className='container mt-4'>
+		// 		<div className='col-8 offset-2'>
+		// 			<Card
+		// 				extra={
+		// 					<Button onClick={() => setIsVisibleModalProfile(true)}>
+		// 						Add Profile
+		// 					</Button>
+		// 				}>
+		// 				<List
+		// 					dataSource={profiles}
+		// 					renderItem={(item, index) => (
+		// 						<List.Item
+		// 							key={`profile${index}`}
+		// 							extra={
+		// 								<Button
+		// 									type='link'
+		// 									onClick={() => {
+		// 										setProfile(item);
+		// 										setIsVisibleModalProfile(true);
+		// 									}}>
+		// 									Edit
+		// 								</Button>
+		// 							}>
+		// 							<List.Item.Meta
+		// 								title={item.name}
+		// 								description={item.address}
+		// 							/>
+		// 						</List.Item>
+		// 					)}
+		// 				/>
+		// 			</Card>
+		// 		</div>
+		// 	</div>
 
-			<ToggleProfile
-				isVisible={isVisibleModalProfile}
-				onClose={() => {
-					setProfile(null);
-					setIsVisibleModalProfile(false);
-				}}
-				onFinish={(val) => onFinish(val)}
-				profile={profile}
-			/>
-		</>
+		// 	<ToggleProfile
+		// 		isVisible={isVisibleModalProfile}
+		// 		onClose={() => {
+		// 			setProfile(null);
+		// 			setIsVisibleModalProfile(false);
+		// 		}}
+		// 		onFinish={(val) => onFinish(val)}
+		// 		profile={profile}
+		// 	/>
+		// </>
 	);
 }
 
