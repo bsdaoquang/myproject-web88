@@ -10,6 +10,7 @@ import HomeScreen from './screens/HomeScreen';
 import Profile from './screens/Profile';
 import PostsScreen from './screens/posts/PostsScreen';
 import PostDetail from './screens/posts/PostDetail';
+import UserDetail from './screens/UserDetail';
 
 const { Content } = Layout;
 
@@ -25,6 +26,7 @@ function App() {
 							<Routes>
 								<Route path='/' element={<HomeScreen />} />
 								<Route path='profile' element={<Profile />} />
+								<Route path='user-detail' element={<UserDetail />} />
 								<Route path='posts'>
 									<Route path='' element={<PostsScreen />} />
 									<Route path='post-detail' element={<PostDetail />} />

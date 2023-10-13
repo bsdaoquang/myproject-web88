@@ -50,7 +50,9 @@ function HomeScreen() {
 										}
 										description={item.body}
 									/>
-									<UserComponent userId={item.userId} isShowAvatar />
+									<Link to={`/user-detail?uid=${item.userId}`}>
+										<UserComponent userId={item.userId} isShowAvatar />
+									</Link>
 								</List.Item>
 							)}
 						/>
