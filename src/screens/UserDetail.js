@@ -3,10 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { appInfo } from '../constants/appInfo';
+import { Card, List } from 'antd';
+import { Link } from 'react-router-dom';
+import UserComponent from '../components/UserComponent';
 
 function UserDetail() {
 	const [userDetail, setUserDetail] = useState();
 	const [isLoading, setIsLoading] = useState(false);
+	const [posts, setPosts] = useState([]);
 
 	const [params] = useSearchParams();
 
@@ -43,7 +47,7 @@ function UserDetail() {
 				if (res.length > 0) {
 					const items = res.filter((element) => `${element.userId}` === uid);
 
-					console.log(items);
+					setPosts(items);
 				}
 				setIsLoading(false);
 			})
@@ -53,7 +57,35 @@ function UserDetail() {
 			});
 	};
 
-	return <div>UserDetail</div>;
+	return (
+		<div className='col-8 offset-2 mt-4'>
+			{userDetail && (
+				<Card>
+					<h1>{userDetail.name}</h1>
+				</Card>
+			)}
+			{posts.length > 0 && (
+				<Card className='mt-4'>
+					<List
+						itemLayout='vertical'
+						isLoading={isLoading}
+						dataSource={posts}
+						renderItem={(item) => (
+							<List.Item key={`${item.id}`}>
+								<List.Item.Meta
+									title={
+										<Link to={`/posts/post-detail?postId=${item.id}`}>
+											{item.title}
+										</Link>
+									}
+								/>
+							</List.Item>
+						)}
+					/>
+				</Card>
+			)}
+		</div>
+	);
 }
 
 export default UserDetail;
